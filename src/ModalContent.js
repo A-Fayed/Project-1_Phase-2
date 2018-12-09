@@ -33,7 +33,8 @@ export default class ModalContent extends Component {
       visible, 
       onClose,
       handleLike,
-      loved  
+      loved,
+      viewsCount
     } = this.props;
       
     return visible && ReactDOM.createPortal(
@@ -186,7 +187,7 @@ export default class ModalContent extends Component {
           >
             <span className="sr-only">viewed</span>
           </a>
-          <h5>4,234</h5>
+          <h5>{viewsCount}</h5>
           <span className="sr-only">times</span>
         </li>
 

@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
+import PropTypes from 'prop-types';
+
 import DynamicButton from './DynamicButton';
 import { StaticButton } from './StaticButton';
 import { CommentButton } from './CommentButton';
 import ModalContent from './ModalContent';
 
-
 export default class Card extends Component {
+static propTypes = {
+	imgSrc: PropTypes.string
+}
+
+static defaultProps = {
+	imgSrc: ''
+}
+
  state = {
 	popupVisible: false,
-	count: 100,
+	loveCount: 100,
+	viewsCount: 300,
 	loved: false
 	}
 
@@ -17,13 +27,20 @@ export default class Card extends Component {
 	this.setState ({
 		popupVisible: true
 	})
+	this.incrementView();
  }
 
  handleLike = () => {
 	this.setState((state) => ({
-	 count: state.count + (state.loved ?  - 1 :  + 1 ),
+	 loveCount: state.loveCount + (state.loved ?  - 1 :  + 1 ),
 	 loved: !state.loved
 	}))
+ }
+
+ incrementView = () => {
+	this.setState({
+		viewsCount: this.state.viewsCount + 1
+	});
  }
 
 	render () {
@@ -34,7 +51,8 @@ export default class Card extends Component {
 		let {
 			popupVisible,
 			loved,
-			count
+			loveCount,
+			viewsCount
 		} = this.state
 
 		let {
@@ -65,14 +83,15 @@ export default class Card extends Component {
 										overflow: hidden;
 									`}>
 									<img
+										onClick={showPopup}
 										src={ require(`${imgSrc}`) }
 										alt='Test'
 										className={css`
 											display: block;
 											width:100% ;
+											cursor: pointer;
 											`}/>
 								</div>
-
 								<ul
 									className={css`
 										margin: 0;
@@ -86,8 +105,8 @@ export default class Card extends Component {
 										}`}>
 										
 									<li><CommentButton count = {100} openModal={showPopup} /></li>
-									<li><StaticButton  count = {300} type = 'view'  /></li>
-									<li><DynamicButton count={count} handleClick={handleLike} openModal={showPopup} loved={loved}  type = 'heart' /></li>
+									<li><StaticButton  count = {viewsCount} type = 'view'  /></li>
+									<li><DynamicButton count={loveCount} handleClick={handleLike} openModal={showPopup} loved={loved}  type = 'heart' /></li>
 								</ul>
 							</div>
 					</div>
@@ -107,7 +126,8 @@ export default class Card extends Component {
 						className={css`
 							width: 130%;
 							transform: translate(-24%, 0%);
-							border-radius: inherit;`}
+							border-radius: inherit;
+							`}
 						/>
 					</div>
 					<h5
@@ -127,7 +147,7 @@ export default class Card extends Component {
 						`}>
 					someonename </h5>
 				</div>
-				<ModalContent loved={loved} handleLike={handleLike}  imgSrc={imgSrc} visible = {popupVisible} onClose={()=> this.setState({ popupVisible: false})}></ModalContent>
+				<ModalContent viewsCount={viewsCount} loved={loved} handleLike={handleLike}  imgSrc={imgSrc} visible = {popupVisible} onClose={()=> this.setState({ popupVisible: false})}></ModalContent>
 			</>
 		)
 	}

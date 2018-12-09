@@ -62,13 +62,16 @@ class CardsList extends Component  {
                   @media (max-width: 550px)  {
                   width: 50%;
                   }
+
+                  @media (max-width: 350px)  {
+                  width: 100%;
+                  }
               }
               `)}>
 
-              {
-                  imagesSrc.map((imageSrc, index) => <li className='listItem'><Card key={index} imgSrc = {imageSrc}  /></li> )
-
-              }
+                {
+                  imagesSrc.map((imageSrc, index) => <li key={index} className='listItem'><Card  imgSrc = {imageSrc} /></li> )
+                }
 
               </ul>
           </div>

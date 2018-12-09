@@ -16,7 +16,7 @@ import DynamicButton from "./DynamicButton";
     `)}
   >
       <div>
-        <div class="modal__icon">
+        <div className="modal__icon">
           <img 
             src={require(`${imgSrc}`)} 
             alt="user icon"

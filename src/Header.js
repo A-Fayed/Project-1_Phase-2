@@ -33,7 +33,7 @@ const Header = () => (
 						margin-right: 30px;
 					`}
 				>
-				AnyName </h1>
+				Dribble </h1>
 				<ul 
 					className={css`
 						display: inline-block;

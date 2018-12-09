@@ -1,4 +1,4 @@
-import React, { Component }  from 'react';
+import React from 'react';
 import GenericActionButton from './GenericActionButton';
 
 export const CommentButton = (props) => {
